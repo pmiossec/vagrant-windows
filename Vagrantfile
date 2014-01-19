@@ -15,9 +15,13 @@ Vagrant.configure("2") do |config|
   config.vm.network :forwarded_port, guest: 5985, host: 5985, id: "winrm", auto_correct: true
 
   config.vm.provision :shell, :path => "setup_requirements.cmd"
-  config.vm.provision :shell,
-    inline: "cinst java.jdk apache.ant git jenkins"
-  config.vm.provision :shell,
-    inline: "cinst maven -version 3.0.5"
+
+  config.vm.provision :shell, inline: "cinst puppet"
+  config.vm.provision :shell, inline: "puppet module install --force rismoney/chocolatey"
+
+  config.vm.provision :puppet do |puppet|
+    puppet.manifests_path = ""
+    puppet.manifest_file  = "base.pp"
+  end
 
 end
