@@ -1,9 +1,11 @@
 Vagrant.configure("2") do |config|
 
   # Configure base box parameters
-  config.vm.box = "winserver"
-  config.vm.hostname = "winserver"
-  config.vm.guest = :windows
+  config.vm.define "winserver" do |winserver|
+    winserver.vm.box = "winserver"
+    winserver.vm.hostname = "winserver"
+    winserver.vm.guest = :windows
+  end
 
   config.vm.network "forwarded_port", guest: 6060, host: 6060
   config.vm.network "forwarded_port", guest: 7070, host: 7070
@@ -16,7 +18,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision :shell, :path => "setup_requirements.cmd"
 
-  config.vm.provision :shell, inline: "cinst puppet"
+  config.vm.provision :shell, inline: "cinst java.jdk puppet"
   config.vm.provision :shell, inline: "puppet module install --force rismoney/chocolatey"
 
   config.vm.provision :puppet do |puppet|
