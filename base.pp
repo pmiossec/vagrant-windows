@@ -11,8 +11,4 @@ node 'default' {
         ensure => "latest",
         provider => 'chocolatey'
   }
-  package { "jenkins" :
-        ensure => "latest",
-        provider => 'chocolatey'
-  }
 }
