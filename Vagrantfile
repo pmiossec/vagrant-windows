@@ -1,10 +1,10 @@
 Vagrant.configure("2") do |config|
 
   # Configure base box parameters
-  config.vm.define "winserver" do |winserver|
-    winserver.vm.box = "winserver"
-    winserver.vm.hostname = "winserver"
-    winserver.vm.guest = :windows
+  config.vm.define "build" do |build|
+    build.vm.box = "build"
+    build.vm.hostname = "build"
+    build.vm.guest = :windows
   end
 
   config.vm.network "forwarded_port", guest: 6060, host: 6060
