@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision :shell, :path => "setup_requirements.cmd"
 
-  config.vm.provision :shell, inline: "cinst java.jdk puppet"
+  config.vm.provision :shell, inline: "cinst nano java.jdk puppet"
   config.vm.provision :shell, inline: "puppet module install --force rismoney/chocolatey"
 
   config.vm.provision :puppet do |puppet|
